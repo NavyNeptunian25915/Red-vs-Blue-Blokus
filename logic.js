@@ -208,16 +208,19 @@ function createPieceElement(piece, player, index) {
     pieceEl.draggable = true;
 
     const grid = document.createElement('div');
-    grid.style.display = 'grid';
-    grid.style.gridTemplateColumns = `repeat(${piece.shape[0].length}, 15px)`;
+    grid.className = 'piece-grid';
+    grid.style.gridTemplateColumns = `repeat(${piece.shape[0].length}, 25px)`;
+    grid.style.gridTemplateRows = `repeat(${piece.shape.length}, 25px)`;
 
     piece.shape.forEach(row => {
         row.forEach(cell => {
             const pieceCell = document.createElement('div');
             pieceCell.className = 'piece-cell';
-            if (cell) pieceCell.style.backgroundColor = player;
-            pieceCell.style.width = '15px';
-            pieceCell.style.height = '15px';
+            if (cell) {
+                pieceCell.classList.add(player === 'red' ? 'filled-red' : 'filled-blue');
+            } else {
+                pieceCell.classList.add('empty');
+            }
             grid.appendChild(pieceCell);
         });
     });
@@ -226,7 +229,7 @@ function createPieceElement(piece, player, index) {
 
     pieceEl.addEventListener('dragstart', e => {
         if (gameState.turn === player) {
-            gameState.selectedPiece = { ...piece, player };
+            gameState.selectedPiece = piece;
             gameState.selectedPieceIndex = index;
             e.dataTransfer.setData("text/plain", `${player}:${index}`);
         } else e.preventDefault();
@@ -234,6 +237,9 @@ function createPieceElement(piece, player, index) {
 
     return pieceEl;
 }
+
+
+
 
 // --- Handle drop ---
 function handleDrop(e) {
