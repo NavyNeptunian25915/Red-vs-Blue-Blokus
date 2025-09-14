@@ -76,6 +76,7 @@ body {
     transition: transform 0.2s ease;
 }
 /* Differentiate filled vs empty cells in piece previews */
+/* Base cell */
 .piece-cell {
     width: 15px;
     height: 15px;
@@ -83,13 +84,19 @@ body {
     box-sizing: border-box;
 }
 
-.piece-cell.filled {
-    background: #fff; /* white glow for filled */
-    box-shadow: 0 0 6px #fff;
+.piece-cell.empty {
+    background: transparent;
 }
 
-.piece-cell.empty {
-    background: transparent; /* transparent background */
+/* Player-colored filled cells */
+.piece-cell.filled-red {
+    background: red;
+    box-shadow: 0 0 6px red;
+}
+
+.piece-cell.filled-blue {
+    background: blue;
+    box-shadow: 0 0 6px blue;
 }
 
 .piece:hover {
@@ -98,7 +105,7 @@ body {
 }
 
 .piece.selected {
-    outline: 2px solid yellow;
+    outline: 2px solid lime;
 }
 
 .piece-cell {
@@ -109,13 +116,13 @@ body {
 }
 
 /* Red and Blue glowing effects */
-.red { 
-    background-color: red; 
+.red {
+    background-color: red;
     box-shadow: 0 0 8px red;
 }
 
-.blue { 
-    background-color: blue; 
+.blue {
+    background-color: blue;
     box-shadow: 0 0 8px blue;
 }
 
