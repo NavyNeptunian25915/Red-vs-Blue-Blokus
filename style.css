@@ -75,6 +75,22 @@ body {
     border-radius: 4px;
     transition: transform 0.2s ease;
 }
+/* Differentiate filled vs empty cells in piece previews */
+.piece-cell {
+    width: 15px;
+    height: 15px;
+    border: 1px solid #333;
+    box-sizing: border-box;
+}
+
+.piece-cell.filled {
+    background: #fff; /* white glow for filled */
+    box-shadow: 0 0 6px #fff;
+}
+
+.piece-cell.empty {
+    background: transparent; /* transparent background */
+}
 
 .piece:hover {
     transform: scale(1.05);
@@ -217,4 +233,5 @@ body {
   background: url("file:///E:/Work/Moves/Great%20Move%20Sticker.png") no-repeat left center;
   background-size: 20px 20px;
   padding-left: 28px;
+
 }
