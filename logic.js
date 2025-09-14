@@ -183,22 +183,32 @@ function generateShapes() {
 
 
 // --- Render pieces ---
-function renderPieces() {
-    redPiecesEl.innerHTML = '';
-    bluePiecesEl.innerHTML = '';
+function renderPieces(shapes, containerId = "piece-selection") {
+    const container = document.getElementById(containerId);
+    container.innerHTML = ""; // clear previous pieces
 
-    gameState.redPieces.forEach((piece, index) => {
-        const pieceEl = createPieceElement(piece, 'red', index);
-        redPiecesEl.appendChild(pieceEl);
+    shapes.forEach(shape => {
+        const pieceEl = document.createElement("div");
+        pieceEl.className = "piece";
+
+        shape.forEach(row => {
+            const rowEl = document.createElement("div");
+            rowEl.className = "row";
+
+            row.forEach(cell => {
+                const cellEl = document.createElement("div");
+                cellEl.className = "piece-cell " + (cell ? "filled" : "empty");
+                rowEl.appendChild(cellEl);
+            });
+
+            pieceEl.appendChild(rowEl);
+        });
+
+        container.appendChild(pieceEl);
     });
-
-    gameState.bluePieces.forEach((piece, index) => {
-        const pieceEl = createPieceElement(piece, 'blue', index);
-        bluePiecesEl.appendChild(pieceEl);
-    });
-
-    updateGameReview();
+    updateGameReview(); // Update review after rendering pieces
 }
+
 
 // --- Create draggable piece ---
 function createPieceElement(piece, player, index) {
