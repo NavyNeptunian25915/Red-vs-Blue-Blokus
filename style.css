@@ -67,36 +67,53 @@ body {
     justify-content: center;
 }
 
+/* Piece container — transparent so only the small cells show */
 .piece {
+    display: inline-block;
+    padding: 4px;
+    background: transparent;
     border: 1px solid #444;
-    cursor: pointer;
-    background: #111;
-    box-shadow: 0 0 8px rgba(255,255,255,0.15);
     border-radius: 4px;
+    cursor: pointer;
     transition: transform 0.2s ease;
 }
-/* Differentiate filled vs empty cells in piece previews */
-/* Base cell */
+
+/* The mini-grid inside each piece */
+.piece-grid {
+    display: grid;
+    grid-auto-rows: 25px;        /* same as board size */
+    grid-auto-columns: 25px;
+    gap: 1px;
+}
+
+/* Cells */
 .piece-cell {
-    width: 15px;
-    height: 15px;
-    border: 1px solid #333;
+    width: 25px;
+    height: 25px;
+    border-radius: 3px;
     box-sizing: border-box;
 }
 
+/* Invisible empty cell keeps shape spacing */
 .piece-cell.empty {
     background: transparent;
+    border: none;
 }
 
-/* Player-colored filled cells */
+/* Filled styles */
 .piece-cell.filled-red {
     background: red;
     box-shadow: 0 0 6px red;
 }
-
 .piece-cell.filled-blue {
     background: blue;
     box-shadow: 0 0 6px blue;
+}
+
+/* Shrink the whole preview piece */
+.piece-grid {
+    transform: scale(0.6);      /* adjust size */
+    transform-origin: top left;
 }
 
 .piece:hover {
